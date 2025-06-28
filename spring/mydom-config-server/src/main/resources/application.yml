@@ -21,7 +21,7 @@ spring:
           token: ${VAULT_TOKEN}        # root token gerado pelo Vault dev
           kv-version: 2
           backend: secret
-          default-context: mydom-auth-server # ou outro nome, como "config-common"
+          default-context: application # ou outro nome, como "config-common"
           profile-separator: '-'       # para buscar: secret/mydom-auth-server-default
 
         git:
