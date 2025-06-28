@@ -30,7 +30,7 @@ public abstract class DotenvInitializer {
         return;
       }
 
-      log.info("🔐 .env => {}={}", entry.getKey(), entry.getValue());
+      log.debug("🔐 .env => {}={}", entry.getKey(), entry.getValue());
       System.setProperty(entry.getKey(), entry.getValue());
 
     });
