@@ -14,8 +14,8 @@ spring:
       server:
 
         vault:
-          host: localhost
-          port: 8200
+          host: ${VAULT_HOST}
+          port: ${VAULT_PORT}
           scheme: http
           authentication: token
           token: ${VAULT_TOKEN}        # root token gerado pelo Vault dev
