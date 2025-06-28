@@ -6,6 +6,12 @@ import java.util.stream.Stream;
 
 public abstract class DotenvInitializer {
 
+  // Private constructor to prevent instantiation
+  private DotenvInitializer() {
+    throw new UnsupportedOperationException("Utility class");
+  }
+
+
   public static void init() {
     Dotenv dotenv = Dotenv.configure()
           .directory(".") // 👈 define que o .env está na raiz
