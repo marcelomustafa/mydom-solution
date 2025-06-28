@@ -1,9 +1,11 @@
 package com.mariapuri.mydom.config;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.stream.Stream;
 
+@Slf4j
 public abstract class DotenvInitializer {
 
   // Private constructor to prevent instantiation
@@ -28,7 +30,7 @@ public abstract class DotenvInitializer {
         return;
       }
 
-      System.out.println("🔐 .env => " + entry.getKey() + "=" + entry.getValue());
+      log.info("🔐 .env => {}={}", entry.getKey(), entry.getValue());
       System.setProperty(entry.getKey(), entry.getValue());
 
     });
