@@ -1,0 +1,41 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: mydom-config-server
+  profiles:
+    active: vault #(native, vault)
+  main:
+    allow-bean-definition-overriding: true
+
+  cloud:
+    config:
+      server:
+
+        vault:
+          host: localhost
+          port: 8200
+          scheme: http
+          authentication: token
+          token: ${VAULT_TOKEN}        # root token gerado pelo Vault dev
+          kv-version: 2
+          backend: secret
+          default-context: mydom-auth-server # ou outro nome, como "config-common"
+          profile-separator: '-'       # para buscar: secret/mydom-auth-server-default
+
+        git:
+          uri: ${GITHUB_URI}
+          username: ${GITHUB_USER}
+          password: ${GITHUB_TOKEN}
+          default-label: main
+          search-paths: config
+          clone-on-start: true
+          basedir: C:\myProject\mydom-solution\configurations
+#        bootstrap: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

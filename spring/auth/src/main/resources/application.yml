@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: mydom-auth-server
+  profiles:
+    active: default #(default, vault)
+  config:
+    import: "configserver:"
+  cloud:
+    config:
+      uri: http://localhost:8888
+      fail-fast: true
+
+server:
+  tomcat:
+    use-apr: never
+
+logging:
+  level:
+    root: DEBUG
+
+
+##✅ Recomendo: siga com a Opção 1 agora, para finalizar a integração.
+##   Depois, evoluímos para Jasypt ou Vault quando quisermos criptografia.
