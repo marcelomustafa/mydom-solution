@@ -37,7 +37,7 @@ public class SecurityConfig {
                 )
           )
           .addFilterAfter(new UserAutenticatedFilter(userService),
-                SecurityContextHolderAwareRequestFilter.class);;
+                SecurityContextHolderAwareRequestFilter.class);
 
     return http.build();
   }

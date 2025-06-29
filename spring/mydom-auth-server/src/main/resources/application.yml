@@ -1,37 +1,64 @@
 spring:
   application:
     name: mydom-auth-server
-  profiles:
-    active: default #(default, vault)
+
   config:
-    import: configserver:http://localhost:8888
-  cloud:
-    config:
-      uri: http://localhost:8888
-      fail-fast: true
+    import: optional:configserver:http://localhost:8888
+    # ou se estiver usando o profile `native`, pode ser:
+    # import: optional:configserver:native://localhost:8888
 
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: https://dev-hftu38jfross7oxj.us.auth0.com
-          audience: https://mydom.api.mariapuri.com.br
+  profiles:
+    active: dev
 
-  datasource:
-    #url: jdbc:oracle:thin:@localhost:1521:XE?useSSL=false&createDatabaseIfNotExists=false&serverTimezone=UTC
-    url: jdbc:oracle:thin:@//localhost:1521/mydomdb?useSSL=false&createDatabaseIfNotExists=false&serverTimezone=UTC
-    username: mydom
-    password: Pass3ase
-    driver-class-name: oracle.jdbc.OracleDriver
+#  cloud:
+#    config:
+#      # apenas se precisar autenticação ou configs adicionais
+#      label: main
+#      username: seu-usuario-opcional
+#      password: sua-senha-opcional
 
-  jpa:
-    hibernate:
-      ddl-auto: update  #(create, create-drop, validate, update)
-    show-sql: false
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.OracleDialect #(org.hibernate.dialect.OracleSqlAstDialect, org.hibernate.dialect.OracleDialect, org.hibernate.dialect.Oracle12Dialect, org.hibernate.dialect.Oracle12cDialect)
-        format_sql: true
-        jdbc:
-          lob:
-            non_contextual_creation: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#
+#
+#
+#spring:
+#  application:
+#    name: mydom-auth-server
+#  profiles:
+#    active: default #(default, vault)
+#  config:
+#    import: configserver:http://localhost:8888
+#  cloud:
+#    config:
+#      uri: http://localhost:8888
+#      fail-fast: true
+#
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: https://dev-hftu38jfross7oxj.us.auth0.com
+#          audience: https://mydom.api.mariapuri.com.br
+#
+#  datasource:
+#    #url: jdbc:oracle:thin:@localhost:1521:XE?useSSL=false&createDatabaseIfNotExists=false&serverTimezone=UTC
+#    url: jdbc:oracle:thin:@//localhost:1521/mydomdb?useSSL=false&createDatabaseIfNotExists=false&serverTimezone=UTC
+#    username: mydom
+#    password: Pass3ase
+#    driver-class-name: oracle.jdbc.OracleDriver
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: update  #(create, create-drop, validate, update)
+#    show-sql: false
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.OracleDialect #(org.hibernate.dialect.OracleSqlAstDialect, org.hibernate.dialect.OracleDialect, org.hibernate.dialect.Oracle12Dialect, org.hibernate.dialect.Oracle12cDialect)
+#        format_sql: true
+#        jdbc:
+#          lob:
+#            non_contextual_creation: true

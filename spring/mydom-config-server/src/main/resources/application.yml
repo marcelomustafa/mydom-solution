@@ -4,8 +4,8 @@ server:
 spring:
   application:
     name: mydom-config-server
-  profiles:
-    active: vault #(native, vault)
+#  profiles:
+#    active: dev #(native, vault)
   main:
     allow-bean-definition-overriding: true
 
@@ -21,7 +21,7 @@ spring:
           token: ${VAULT_TOKEN}        # root token gerado pelo Vault dev
           kv-version: 2
           backend: secret
-          default-context: application # ou outro nome, como "config-common"
+          default-context: mydom-config-server # ou outro nome, como "config-common"
           profile-separator: '-'       # para buscar: secret/mydom-auth-server-default
 
         git:
@@ -33,6 +33,16 @@ spring:
           clone-on-start: true
           basedir: C:\myProject\mydom-solution\configurations
 #        bootstrap: true
+
+    vault:
+      uri: http://localhost:8200
+      authentication: TOKEN
+      token: ${VAULT_TOKEN}  # Substitua pelo seu token real
+      kv:
+        enabled: true
+        backend: secret
+        default-context: mydom-config-server
+        profile-separator: '-'
 
 management:
   endpoints:
