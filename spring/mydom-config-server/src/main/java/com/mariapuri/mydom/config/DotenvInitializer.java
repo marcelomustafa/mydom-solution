@@ -25,12 +25,16 @@ public abstract class DotenvInitializer {
     // Configura as variáveis que o Spring deve usar
     dotenv.entries().forEach(entry -> {
 
-      if(Stream.of("VAULT_HOST", "VAULT_PORT", "VAULT_TOKEN", "GITHUB_USER", "GITHUB_TOKEN", "GITHUB_URI")
-            .noneMatch(key -> key.equals(entry.getKey()))) {
+      if(Stream.of(
+            "VAULT_HOST", "VAULT_PORT", "VAULT_TOKEN",
+                  "GITHUB_USER", "GITHUB_TOKEN", "GITHUB_URI",
+                  "ORACLE_URL", "ORACLE_USERNAME", "ORACLE_PASSWORD",
+                  "AUTH0_ISSUER", "AUTH0_DOMAIN", "AUTH0_CLIENT_ID","AUTH0_CLIENT_SECRET", "AUTH0_AUDIENCE"
+      ).noneMatch(key -> key.equals(entry.getKey()))) {
         return;
       }
 
-      log.debug("🔐 .env => {}={}", entry.getKey(), entry.getValue());
+      log.info("🔐 .env => {}={}", entry.getKey(), entry.getValue());
       System.setProperty(entry.getKey(), entry.getValue());
 
     });
