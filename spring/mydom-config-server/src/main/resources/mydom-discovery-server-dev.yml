@@ -13,4 +13,3 @@ eureka:
   server:
     wait-time-in-ms-when-sync-empty: 0
 
-mensagem: "Discovery atualizado às 15h49"
